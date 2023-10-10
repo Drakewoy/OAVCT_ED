@@ -12,6 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1> Enregistrer Vehicule!</h1>
+        <a href="${pageContext.request.contextPath}/Gestionvh/enre_vehicule.jsp">Ajouter un Vehicule</a>
     </body>
 </html>
