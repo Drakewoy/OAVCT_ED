@@ -68,7 +68,7 @@
 <body>
     <div class="container">
         <div class="container2">
-            <a href="${pageContext.request.contextPath}/Gestionvh/gestion.jsp">
+            <a href="${pageContext.request.contextPath}/GestionVhServlet">
                 <div>
                     <img src="icon/car-solid.svg" alt="car">
                     <h1 style="font-size: 16px;">Gestion Vehicule
