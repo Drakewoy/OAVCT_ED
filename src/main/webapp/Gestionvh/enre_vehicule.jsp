@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="${pageContext.request.contextPath}/GestionVhServlet" method="post">
         <!-- Type de véhicule -->
         <select name="type_v" id="">
             <option value="motocyclette">Motocyclette</option>
@@ -52,7 +52,7 @@
         <!-- L'Année du vehicule -->
         <input type="text" name="annee" placeholder="Annee">
         <!-- Courriel propriétaire -->
-        <input type="text" name="couriel" placeholder="Adresse email">
+        <input type="text" name="courriel" placeholder="Adresse email">
         <!-- Type transmission -->
         <select name="transmission" id="">
             <option selected>Transmission</option>

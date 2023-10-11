@@ -4,22 +4,33 @@
  */
 package model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  *
  * @author laine
  */
+@Entity
+@Table(name = "gestionVehicule")
 public class GestionVh {
-    
+
     private String type_v; //  (Motocyclette, Voitures, Poids lourds, etc…)
-    private int id_vehicule; 
-    private String marque; 
-    private String no_moteur; 
-    private int nb_cynlindre; 
-    private String couleur; 
-    private String proprietaire; 
-    private String plaque; 
-    private String tel_pro; 
-    private String adresse_pro; 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id_vehicule;
+    private String marque;
+    private String modele;
+    private String no_moteur;
+    private int nb_cylindre;
+    private String couleur;
+    private String proprietaire;
+    private String plaque;
+    private String tel_pro;
+    private String adresse_pro;
     private String type_piece; // identification, Passeport
     private String no_piece;
     private String annee;
@@ -32,13 +43,16 @@ public class GestionVh {
     private String date_enre;
 
     // Constructeur
+    public GestionVh() {
+    }
 
-    public GestionVh(String type_v, int id_vehicule, String marque, String no_moteur, int nb_cynlindre, String couleur, String proprietaire, String plaque, String tel_pro, String adresse_pro, String type_piece, String no_piece, String annee, String courriel, String transmission, String type_essence, String photo, String sur_alerte, String date_alerte, String date_enre) {
+    public GestionVh(String type_v, int id_vehicule, String marque, String modele, String no_moteur, int nb_cylindre, String couleur, String proprietaire, String plaque, String tel_pro, String adresse_pro, String type_piece, String no_piece, String annee, String courriel, String transmission, String type_essence, String photo, String sur_alerte, String date_alerte, String date_enre) {
         this.type_v = type_v;
         this.id_vehicule = id_vehicule;
         this.marque = marque;
+        this.modele = modele;
         this.no_moteur = no_moteur;
-        this.nb_cynlindre = nb_cynlindre;
+        this.nb_cylindre = nb_cylindre;
         this.couleur = couleur;
         this.proprietaire = proprietaire;
         this.plaque = plaque;
@@ -55,8 +69,7 @@ public class GestionVh {
         this.date_alerte = date_alerte;
         this.date_enre = date_enre;
     }
-    
-    
+
     public String getType_v() {
         return type_v;
     }
@@ -80,6 +93,14 @@ public class GestionVh {
     public void setMarque(String marque) {
         this.marque = marque;
     }
+    
+     public String getModele() {
+        return modele;
+    }
+
+    public void setModele(String modele) {
+        this.modele = modele;
+    }
 
     public String getNo_moteur() {
         return no_moteur;
@@ -89,12 +110,12 @@ public class GestionVh {
         this.no_moteur = no_moteur;
     }
 
-    public int getNb_cynlindre() {
-        return nb_cynlindre;
+    public int getNb_cylindre() {
+        return nb_cylindre;
     }
 
-    public void setNb_cynlindre(int nb_cynlindre) {
-        this.nb_cynlindre = nb_cynlindre;
+    public void setNb_cylindre(int nb_cylindre) {
+        this.nb_cylindre = nb_cylindre;
     }
 
     public String getCouleur() {
@@ -216,5 +237,5 @@ public class GestionVh {
     public void setDate_enre(String date_enre) {
         this.date_enre = date_enre;
     }
-    
+
 }

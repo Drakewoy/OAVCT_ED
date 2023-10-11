@@ -16,6 +16,10 @@
         <servlet-name>RenouServlet</servlet-name>
         <servlet-class>controlleur.RenouServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GestionVhServlet</servlet-name>
+        <servlet-class>controlleur.GestionVhServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>GvhServlet</servlet-name>
         <url-pattern>/GvhServlet</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>RenouServlet</servlet-name>
         <url-pattern>/RenouServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GestionVhServlet</servlet-name>
+        <url-pattern>/GestionVhServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

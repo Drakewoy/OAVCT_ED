@@ -9,6 +9,7 @@ package model;
  * @author laine
  */
 public class Alerte {
+
     private int id_alerte;
     private int id_vehicule;
     private String Type_alerte;
@@ -16,8 +17,10 @@ public class Alerte {
     private String heure_incident;
     private String declarant;
     private String description;
-    
+
     // constructeur
+    public Alerte() {
+    }
 
     public Alerte(int id_alerte, int id_vehicule, String Type_alerte, String lieu_incident, String heure_incident, String declarant, String description) {
         this.id_alerte = id_alerte;
@@ -28,9 +31,8 @@ public class Alerte {
         this.declarant = declarant;
         this.description = description;
     }
-    
-    // Getters and Setters
 
+    // Getters and Setters
     public int getId_alerte() {
         return id_alerte;
     }
@@ -86,7 +88,5 @@ public class Alerte {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-}
 
+}

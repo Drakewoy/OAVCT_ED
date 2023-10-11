@@ -9,14 +9,17 @@ package model;
  * @author laine
  */
 public class Renou {
+
     private int id_renou;
     private int id_vehicule;
     private String no_transaction;
     private double montant_assu;
     private String date_paie;
     private String date_demission;
-    
+
     // constructeur
+    public Renou() {
+    }
 
     public Renou(int id_renou, int id_vehicule, String no_transaction, double montant_assu, String date_paie, String date_demission) {
         this.id_renou = id_renou;
@@ -26,9 +29,8 @@ public class Renou {
         this.date_paie = date_paie;
         this.date_demission = date_demission;
     }
-    
-    // Getters and Setters
 
+    // Getters and Setters
     public int getId_renou() {
         return id_renou;
     }
@@ -76,7 +78,5 @@ public class Renou {
     public void setDate_demission(String date_demission) {
         this.date_demission = date_demission;
     }
-    
-    
-    
+
 }

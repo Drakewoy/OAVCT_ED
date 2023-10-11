@@ -9,6 +9,7 @@ package model;
  * @author laine
  */
 public class Transfere {
+
     private int id_trans;
     private int id_vehicule;
     private String nouveau_prop;
@@ -20,8 +21,10 @@ public class Transfere {
     private String motif_trans;
     private String date_trans;
     private String etat;
-    
+
     // constructeur
+    public Transfere() {
+    }
 
     public Transfere(int id_trans, int id_vehicule, String nouveau_prop, String sexe, String telephone, String adresse, String type_piece, String no_piece, String motif_trans, String date_trans, String etat) {
         this.id_trans = id_trans;
@@ -125,7 +128,5 @@ public class Transfere {
     public void setEtat(String etat) {
         this.etat = etat;
     }
-    
-    
-    
+
 }
