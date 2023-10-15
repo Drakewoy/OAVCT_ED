@@ -4,13 +4,22 @@
  */
 package model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  *
  * @author laine
  */
-public class Transfere {
-
-    private int id_trans;
+@Entity
+@Table(name="transfert_prop")
+public class TransfertModel {
+@Id
+@GeneratedValue(strategy=GenerationType.IDENTITY)
+private int id_trans;
     private int id_vehicule;
     private String nouveau_prop;
     private String sexe;
@@ -23,10 +32,10 @@ public class Transfere {
     private String etat;
 
     // constructeur
-    public Transfere() {
+    public TransfertModel() {
     }
 
-    public Transfere(int id_trans, int id_vehicule, String nouveau_prop, String sexe, String telephone, String adresse, String type_piece, String no_piece, String motif_trans, String date_trans, String etat) {
+    public TransfertModel(int id_trans, int id_vehicule, String nouveau_prop, String sexe, String telephone, String adresse, String type_piece, String no_piece, String motif_trans, String date_trans, String etat) {
         this.id_trans = id_trans;
         this.id_vehicule = id_vehicule;
         this.nouveau_prop = nouveau_prop;

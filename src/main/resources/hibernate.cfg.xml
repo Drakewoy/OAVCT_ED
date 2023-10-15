@@ -13,5 +13,6 @@
         <property name="sql_show">true</property>
         <property name="hbm2ddl.auto">update</property>
         <mapping class="model.GestionVh"/>
+        <mapping class="model.TransfertModel"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="4.0" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
     <servlet>
-        <servlet-name>TransfereServlet</servlet-name>
-        <servlet-class>controlleur.TransfereServlet</servlet-class>
+        <servlet-name>GvhServlet</servlet-name>
+        <servlet-class>controlleur.GvhServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>TransfertServlet</servlet-name>
+        <servlet-class>controlleur.TransfertServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AlerteServlet</servlet-name>
@@ -17,8 +21,12 @@
         <servlet-class>controlleur.GestionVhServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>TransfereServlet</servlet-name>
-        <url-pattern>/TransfereServlet</url-pattern>
+        <servlet-name>GvhServlet</servlet-name>
+        <url-pattern>/GvhServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TransfertServlet</servlet-name>
+        <url-pattern>/TransfertServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AlerteServlet</servlet-name>
