@@ -23,7 +23,9 @@ import model.GestionVh;
  * @author laine
  */
 public class GestionVhServlet extends HttpServlet {
-        GvDao gvDa = new GvDao();
+
+    GvDao gvDa = new GvDao();
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -59,9 +61,9 @@ public class GestionVhServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-
+        lister(req, res);
     }
 
     /**
@@ -75,11 +77,11 @@ public class GestionVhServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-            try {
-                enregistrer(req, res);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            enregistrer(req, res);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
@@ -110,9 +112,9 @@ public class GestionVhServlet extends HttpServlet {
         gv.setDate_enre(req.getParameter("date_enre"));
         try {
             gvDa.save(gv);
-                HttpSession session = req.getSession();
-                session.setAttribute("gv", gv);
-                lister(req, res);
+            HttpSession session = req.getSession();
+            session.setAttribute("gv", gv);
+            lister(req, res);
         } catch (SQLException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (UnsupportedOperationException ex) {
@@ -124,18 +126,18 @@ public class GestionVhServlet extends HttpServlet {
 
     protected List<GestionVh> lister(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<GestionVh> afficher = null;
-            try {
-                afficher = gvDa.lister();
-                HttpSession session = req.getSession();
-                session.setAttribute("list", afficher);
-                res.sendRedirect("Gestionvh/gestion.jsp");
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (UnsupportedOperationException ex) {
-                Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            afficher = gvDa.lister();
+            HttpSession session = req.getSession();
+            session.setAttribute("list", afficher);
+            res.sendRedirect("Gestionvh/gestion.jsp");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedOperationException ex) {
+            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return afficher;
     }
 }
