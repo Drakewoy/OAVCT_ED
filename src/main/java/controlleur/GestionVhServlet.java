@@ -25,70 +25,63 @@ import model.GestionVh;
 public class GestionVhServlet extends HttpServlet {
 
     GvDao gvDa = new GvDao();
+    // Quelque page static
+    final String ajouter = "Gestionvh/enre_vehicule.jsp";
+    final String modifier = "Gestionvh/mod_vehicule.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-//    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        response.setContentType("text/html;charset=UTF-8");
-//        try (PrintWriter out = response.getWriter()) {
-//            /* TODO output your page here. You may use following sample code. */
-//            out.println("<!DOCTYPE html>");
-//            out.println("<html>");
-//            out.println("<head>");
-//            out.println("<title>Servlet GestionVhServlet</title>");            
-//            out.println("</head>");
-//            out.println("<body>");
-//            out.println("<h1>Servlet GestionVhServlet at " + request.getContextPath() + "</h1>");
-//            out.println("</body>");
-//            out.println("</html>");
-//        }
-//    }
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        lister(req, res);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res)
-            throws ServletException, IOException {
         try {
-            enregistrer(req, res);
+            String action = req.getParameter("action");
+            String id = req.getParameter("id");
+            GestionVh gv = gvDa.rechercher(id);
+            if (action.equals("ajouter")) {
+                res.sendRedirect(ajouter);
+            }
+
+            else if (action.equals("modifier")) {
+                if (gv == null) {
+                    lister(req, res);
+                } else {
+                    HttpSession session = req.getSession();
+                    session.setAttribute("liste", gv);
+                    res.sendRedirect(modifier);
+                }
+                
+            }else if (action.equals("supprimer")) {
+                
+            }
+            else if (action.equals("lister")) {
+                lister(req, res);
+            } 
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+  
+}
+
+@Override
+protected void doPost(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException {
+        try {
+            enregistrer(req, res);
+
+} catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionVhServlet.class  
+
+.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     // Enregistrer un vehicule
     protected void enregistrer(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException, ClassNotFoundException {
-
+        
         GestionVh gv = new GestionVh();
         gv.setType_v(req.getParameter("type_v"));
         gv.setMarque(req.getParameter("marque"));
@@ -115,29 +108,44 @@ public class GestionVhServlet extends HttpServlet {
             HttpSession session = req.getSession();
             session.setAttribute("gv", gv);
             lister(req, res);
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedOperationException ex) {
-            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
+} catch (SQLException ex) {
+            Logger.getLogger(GestionVhServlet.class  
+
+.getName()).log(Level.SEVERE, null, ex);
+
+} catch (UnsupportedOperationException ex) {
+            Logger.getLogger(GestionVhServlet.class  
+
+.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     // Lister
 
-    protected List<GestionVh> lister(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    protected void lister(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<GestionVh> afficher = null;
         try {
             afficher = gvDa.lister();
             HttpSession session = req.getSession();
-            session.setAttribute("list", afficher);
+            session.setAttribute("liste", afficher);
             res.sendRedirect("Gestionvh/gestion.jsp");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedOperationException ex) {
-            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
+
+} catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionVhServlet.class  
+
+.getName()).log(Level.SEVERE, null, ex);
+
+} catch (SQLException ex) {
+            Logger.getLogger(GestionVhServlet.class  
+
+.getName()).log(Level.SEVERE, null, ex);
+
+} catch (UnsupportedOperationException ex) {
+            Logger.getLogger(GestionVhServlet.class  
+
+.getName()).log(Level.SEVERE, null, ex);
         }
-        return afficher;
+      
     }
 }

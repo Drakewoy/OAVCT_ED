@@ -8,8 +8,10 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import model.GestionVh;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import utils.HibernateUtils;
 
 /**
@@ -41,8 +43,25 @@ public class GvDao implements Iservices<GestionVh> {
 
     @Override
     public GestionVh rechercher(String id) throws IOException, ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+        // Create a query to select a GestionVh object by its ID
+        Query query = session.createQuery("FROM GestionVh WHERE id_vehicule = :id");
+        query.setParameter("id", id);
+
+        // Execute the query and get the result
+        List<GestionVh> result = query.list();
+
+        // Check if a matching GestionVh object was found
+        if (!result.isEmpty()) {
+            return result.get(0); // Assuming ID is unique, so returning the first match
+        } else {
+            return null; // No matching GestionVh found
+        }
+    } catch (HibernateException ex) {
+        ex.printStackTrace();
+        throw new SQLException("Error searching for GestionVh: " + ex.getMessage());
     }
+}
 
     @Override
     public int modifier(GestionVh obj) throws IOException, ClassNotFoundException, SQLException {

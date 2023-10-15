@@ -68,7 +68,7 @@
 <body>
     <div class="container">
         <div class="container2">
-            <a href="${pageContext.request.contextPath}/GestionVhServlet">
+            <a href="${pageContext.request.contextPath}/GestionVhServlet?action=lister">
                 <div>
                     <img src="icon/car-solid.svg" alt="car">
                     <h1 style="font-size: 16px;">Gestion Vehicule
