@@ -15,14 +15,11 @@
         <h1>Enregistrement nouveau transfert</h1>
         <hr>
         <br>
-        <form  method="post" action="">
-            <label for="id_trans" >id_trans</label>
-            <input type="number" id="id_trans" name="id_trans"><br><br>
+        <form  method="post" action="${pageContext.request.contextPath}/TransfertServlet">
             <label for="id_vehicule" >id_vehicule</label>
             <input type="number" name="id_vehicule" id="id_vehicule"><br><br>
             <label for="nouveau_prop">Nouveau proprietaire</label>
-            <input type="string" name="nom" value="Nom" id="nouveau_prop">
-            <input type="string" name="prenom" value="Prenom" id="nouveau_prop">  <br><br>      
+            <input type="string" name="nom" placeholder="Nom_complet" id="nouveau_prop">      
 
             <label for="sexe">Sexe</label>
             <select id="sexe">
@@ -35,7 +32,7 @@
                     <input type="string" name="adresse" id="adresse" ><br><br>
 
                     <label for="type_piece">Type Pieces</label>   
-                    <select id="type_piece">
+                    <select id="type_pieces">
                         <option value="licence">Licence</option>
                         <option value="carte_identification">Carte Identification</option>
                         <option value="pasport">Pasport</option>
@@ -48,6 +45,7 @@
                                 <input type="string" name="date_trans" id="date_trans"> <br><br>
                                 <label for="etat" >Etat</labe>
                                     <input type="string" name="etat" id="etat">
+                                    <input type="submit" value="Enregistrer">
                                     </form>
                                     </body>
                                     </html>

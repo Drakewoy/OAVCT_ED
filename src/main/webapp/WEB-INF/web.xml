@@ -5,8 +5,8 @@
         <servlet-class>controlleur.GvhServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TransfereServlet</servlet-name>
-        <servlet-class>controlleur.TransfereServlet</servlet-class>
+        <servlet-name>TransfertServlet</servlet-name>
+        <servlet-class>controlleur.TransfertServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AlerteServlet</servlet-name>
@@ -25,8 +25,8 @@
         <url-pattern>/GvhServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TransfereServlet</servlet-name>
-        <url-pattern>/TransfereServlet</url-pattern>
+        <servlet-name>TransfertServlet</servlet-name>
+        <url-pattern>/TransfertServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AlerteServlet</servlet-name>

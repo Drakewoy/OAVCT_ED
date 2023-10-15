@@ -13,5 +13,7 @@
     </head>
     <body>
         <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp"><h2>Enregistrer un transfert</h2></a>
+        <a href="${pageContext.request.contextPath}/GestionTransfert/modifier_transfert.jsp"><h2>Enregistrer un transfert</h2></a>
+        <a href="${pageContext.request.contextPath}/GestionTransfert/supprimer_transfert.jsp"><h2>Enregistrer un transfert</h2></a>
     </body>
 </html>
