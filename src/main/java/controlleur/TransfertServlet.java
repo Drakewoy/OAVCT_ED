@@ -70,8 +70,7 @@ protected void save(HttpServletRequest request, HttpServletResponse response)
 }
 
     private void liste(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // HttpSession session=request.getSession();
+//         HttpSession session=request.getSession();
 //        ListTransfertModel> listransfert = dao.getAll();
 //        request.setAttribute("liste", listransfert);
 //        request.getRequestDispatcher("/index.jsp").forward(request, response);

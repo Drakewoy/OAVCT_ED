@@ -19,7 +19,7 @@ import utils.HibernateUtils;
  * @author laine
  */
 public class GvDao implements Iservices<GestionVh> {
-
+    
     Transaction transaction = null;
 //    enregistrer vehicule
 
@@ -35,39 +35,56 @@ public class GvDao implements Iservices<GestionVh> {
         }
         return e;
     }
-
+    
     @Override
     public int supprimer(GestionVh obj) throws IOException, ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int n =0;
+    try(Session session = HibernateUtils.getSessionFactory().openSession()){
+    transaction = session.getTransaction();
+    transaction.begin();
+    session.remove(obj);
+    transaction.commit();
+    n = 1;
     }
-
+    return n;
+    }
+    
     @Override
     public GestionVh rechercher(String id) throws IOException, ClassNotFoundException, SQLException {
-    try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-        // Create a query to select a GestionVh object by its ID
-        Query query = session.createQuery("FROM GestionVh WHERE id_vehicule = :id");
-        query.setParameter("id", id);
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            // Create a query to select a GestionVh object by its ID
+            Query query = session.createQuery("FROM GestionVh WHERE id_vehicule = :id");
+            query.setParameter("id", id);
 
-        // Execute the query and get the result
-        List<GestionVh> result = query.list();
+            // Execute the query and get the result
+            List<GestionVh> result = query.list();
 
-        // Check if a matching GestionVh object was found
-        if (!result.isEmpty()) {
-            return result.get(0); // Assuming ID is unique, so returning the first match
-        } else {
-            return null; // No matching GestionVh found
+            // Check if a matching GestionVh object was found
+            if (!result.isEmpty()) {
+                return result.get(0); // Assuming ID is unique, so returning the first match
+            } else {
+                return null; // No matching GestionVh found
+            }
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            throw new SQLException("Error searching for GestionVh: " + ex.getMessage());
         }
-    } catch (HibernateException ex) {
-        ex.printStackTrace();
-        throw new SQLException("Error searching for GestionVh: " + ex.getMessage());
     }
-}
-
+    
     @Override
     public int modifier(GestionVh obj) throws IOException, ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int result = 0;
+        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            transaction = session.getTransaction();
+            transaction.begin();
+            session.merge(obj);
+            transaction.commit();
+            result = 1;
+        }
+        
+        return result;
     }
-
+    
     @Override
     public List<GestionVh> lister() throws IOException, ClassNotFoundException, SQLException, UnsupportedOperationException {
         List<GestionVh> affich = null;
@@ -77,8 +94,8 @@ public class GvDao implements Iservices<GestionVh> {
             affich = session.createQuery("FROM GestionVh", GestionVh.class).list();
             transaction.commit();
         }
-
+        
         return affich;
     }
-
+    
 }

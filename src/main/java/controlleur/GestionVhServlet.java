@@ -38,9 +38,7 @@ public class GestionVhServlet extends HttpServlet {
             GestionVh gv = gvDa.rechercher(id);
             if (action.equals("ajouter")) {
                 res.sendRedirect(ajouter);
-            }
-
-            else if (action.equals("modifier")) {
+            } else if (action.equals("modifier")) {
                 if (gv == null) {
                     lister(req, res);
                 } else {
@@ -48,40 +46,48 @@ public class GestionVhServlet extends HttpServlet {
                     session.setAttribute("liste", gv);
                     res.sendRedirect(modifier);
                 }
-                
-            }else if (action.equals("supprimer")) {
-                
-            }
-            else if (action.equals("lister")) {
+
+            } else if (action.equals("supprimer")) {
+                    supprimer(req, res);
+            } else if (action.equals("lister")) {
                 lister(req, res);
-            } 
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-  
-}
+    }
 
-@Override
-protected void doPost(HttpServletRequest req, HttpServletResponse res)
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         try {
-            enregistrer(req, res);
-
-} catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestionVhServlet.class  
-
-.getName()).log(Level.SEVERE, null, ex);
+            String id = req.getParameter("id");
+            String action = req.getParameter("action");
+            switch (action) {
+                case "ajouter":
+                    enregistrer(req, res);
+                    break;
+                case "modifier":
+                    modifier(req, res);
+                    break;
+                default:
+                    lister(req, res);
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     // Enregistrer un vehicule
     protected void enregistrer(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException, ClassNotFoundException {
-        
+
         GestionVh gv = new GestionVh();
         gv.setType_v(req.getParameter("type_v"));
         gv.setMarque(req.getParameter("marque"));
@@ -109,17 +115,15 @@ protected void doPost(HttpServletRequest req, HttpServletResponse res)
             session.setAttribute("gv", gv);
             lister(req, res);
 
-} catch (SQLException ex) {
-            Logger.getLogger(GestionVhServlet.class  
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionVhServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
 
-.getName()).log(Level.SEVERE, null, ex);
-
-} catch (UnsupportedOperationException ex) {
-            Logger.getLogger(GestionVhServlet.class  
-
-.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedOperationException ex) {
+            Logger.getLogger(GestionVhServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
     // Lister
 
@@ -131,21 +135,71 @@ protected void doPost(HttpServletRequest req, HttpServletResponse res)
             session.setAttribute("liste", afficher);
             res.sendRedirect("Gestionvh/gestion.jsp");
 
-} catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestionVhServlet.class  
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(GestionVhServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
 
-.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionVhServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
 
-} catch (SQLException ex) {
-            Logger.getLogger(GestionVhServlet.class  
-
-.getName()).log(Level.SEVERE, null, ex);
-
-} catch (UnsupportedOperationException ex) {
-            Logger.getLogger(GestionVhServlet.class  
-
-.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedOperationException ex) {
+            Logger.getLogger(GestionVhServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
         }
-      
+
     }
+//    La methode update
+
+    private void modifier(HttpServletRequest req, HttpServletResponse res)
+            throws SQLException, ClassNotFoundException, IOException, ServletException {
+        PrintWriter out = res.getWriter();
+        GestionVh gvMod = new GestionVh();
+        String id = req.getParameter("id_v");
+        gvMod.setType_v(req.getParameter("type_v"));
+        gvMod.setMarque(req.getParameter("marque"));
+        gvMod.setModele(req.getParameter("modele"));
+        gvMod.setNo_moteur(req.getParameter("no_moteur"));
+        gvMod.setNb_cylindre(Integer.parseInt(req.getParameter("nb_cylindre")));
+        gvMod.setCouleur(req.getParameter("couleur"));
+        gvMod.setProprietaire(req.getParameter("proprietaire"));
+        gvMod.setPlaque(req.getParameter("plaque"));
+        gvMod.setTel_pro(req.getParameter("tel"));
+        gvMod.setAdresse_pro(req.getParameter("adresse"));
+        gvMod.setType_piece(req.getParameter("type_piece"));
+        gvMod.setNo_piece(req.getParameter("no_piece"));
+        gvMod.setAnnee(req.getParameter("annee"));
+        gvMod.setCourriel(req.getParameter("courriel"));
+        gvMod.setTransmission(req.getParameter("transmission"));
+        gvMod.setType_essence(req.getParameter("essence"));
+        gvMod.setPhoto(req.getParameter("photo"));
+        gvMod.setSur_alerte(req.getParameter("alerte"));
+        gvMod.setDate_alerte(req.getParameter("date_alerte"));
+        gvMod.setDate_enre(req.getParameter("date_enre"));
+        if (gvDa.rechercher(id) != null) {
+            gvMod.setId_vehicule(Integer.parseInt(id));
+            if (gvDa.modifier(gvMod) > 0) {
+                lister(req, res);
+            } else {
+                out.print("Mise a jour echoue");
+            }
+        }
+
+    }
+
+    private void supprimer(HttpServletRequest req, HttpServletResponse res)
+            throws IOException, ClassNotFoundException, SQLException, ServletException {
+        PrintWriter out = res.getWriter();
+        String id = req.getParameter("id");
+        GestionVh gv = new GestionVh();
+        if (gvDa.rechercher(id) != null) {
+            gv.setId_vehicule(Integer.parseInt((id)));
+            if (gvDa.supprimer(gv) > 0) {
+                lister(req, res);
+            } else {
+                out.print("Suppression echoue");
+            }
+        }
+    }
+
 }
