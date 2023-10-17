@@ -12,17 +12,17 @@
         <title>JSP</title>
     </head>
     <body>
-        <h1>Enregistrement nouveau transfert</h1>
+        <h1>Enregistrement un nouveau transfert</h1>
         <hr>
         <br>
         <form  method="post" action="${pageContext.request.contextPath}/TransfertServlet">
             <label for="id_vehicule" >id_vehicule</label>
             <input type="number" name="id_vehicule" id="id_vehicule"><br><br>
             <label for="nouveau_prop">Nouveau proprietaire</label>
-            <input type="text" name="nom" placeholder="Nom_complet" id="nouveau_prop">      
+            <input type="text" name="nouveau_prop" placeholder="Nom_complet"> <br><br>      
 
             <label for="sexe">Sexe</label>
-            <select id="sexe">
+            <select id="sexe" name="sexe">
                 <option value="masculin">Masculin</option>
                 <option value="feminin">Feminin</option>
             </select> <br><br>
@@ -32,7 +32,7 @@
                     <input type="text" name="adresse" id="adresse" ><br><br>
 
                     <label for="type_piece">Type Pieces</label>   
-                    <select id="type_pieces">
+                    <select id="type_piece" name="type_piece">
                         <option value="licence">Licence</option>
                         <option value="carte_identification">Carte Identification</option>
                         <option value="pasport">Pasport</option>
@@ -44,8 +44,12 @@
                             <label for="date_trans" >Date transfert</labe>
                                 <input type="date" name="date_trans" id="date_trans"> <br><br>
                                 <label for="etat" >Etat</labe>
-                                    <input type="text" name="etat" id="etat">
-                                    <input type="submit" value="Enregistrer">
+                                <select id="etat" name="etat">
+                                    <option value="a">A</option>
+                                    <option value="n">N</option>
+                                    <option value="e">E</option>
+                                </select>
+                                    <input type="submit" value="Save">
                                     </form>
                                     </body>
                                     </html>

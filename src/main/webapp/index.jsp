@@ -78,7 +78,7 @@
             <a href="${pageContext.request.contextPath}/GestionTransfert/accueilTrans.jsp">
                 <div>
                     <img src="icon/right-left-solid.svg" alt="">
-                    <h1>Transfere</h1>
+                    <h1>Transfert</h1>
                 </div>
             </a>
             <a href="">

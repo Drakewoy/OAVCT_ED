@@ -19,7 +19,8 @@ import utils.HibernateUtils;
 /**
  *
  * @author Eddy
- */@Entity
+ */
+  
 public class TransfertDao implements Iservices<TransfertModel> {
 private SessionFactory sessionFactory=null;
     private Session session=null;

@@ -60,7 +60,6 @@ protected void save(HttpServletRequest request, HttpServletResponse response)
          model.setAdresse(request.getParameter("adresse"));
          model.setType_piece(request.getParameter("type_piece"));
          model.setNo_piece(request.getParameter("no_piece"));
-         model.setSexe(request.getParameter("sexe"));
          model.setMotif_trans(request.getParameter("motif_trans"));
          model.setDate_trans(request.getParameter("date_trans"));
          model.setEtat(request.getParameter("etat"));
@@ -70,8 +69,7 @@ protected void save(HttpServletRequest request, HttpServletResponse response)
 }
 
     private void liste(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet.");
-        // HttpSession session=request.getSession();
+//         HttpSession session=request.getSession();
 //        ListTransfertModel> listransfert = dao.getAll();
 //        request.setAttribute("liste", listransfert);
 //        request.getRequestDispatcher("/index.jsp").forward(request, response);
