@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="${pageContext.request.contextPath}/GestionVhServlet" method="post">
+    <form action="${pageContext.request.contextPath}/GestionVhServlet?action=ajouter" method="post">
         <!-- Type de véhicule -->
         <select name="type_v" id="">
             <option value="motocyclette">Motocyclette</option>

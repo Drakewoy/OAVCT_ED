@@ -20,7 +20,7 @@
     <body>
         <% GestionVh gv = (GestionVh) session.getAttribute("liste");%>
 
-        <form action="${pageContext.request.contextPath}/GestionVhServlet" method="post">
+        <form action="${pageContext.request.contextPath}/GestionVhServlet?action=modifier" method="post">
             <!-- Type de véhicule -->
             <select name="type_v" id="">
                 <%for (String tv : typeV) {%>
@@ -28,9 +28,7 @@
                 <%}%>
             </select>
             <!-- ID vehicule-->
-
-            <input type="text" name="id_v" placeholder="Id vehicule" value="<%= gv != null ? gv.getId_vehicule() : 0%>">
-
+            <input type="text" name="id_v"  placeholder="Id vehicule" value="<%= gv != null ? gv.getId_vehicule() : 0%>">
             <!-- Marque -->
             <input type="text" name="marque" placeholder="Marque" value="<%=gv != null ? gv.getMarque() : ""%>">
             <!-- Modele -->
@@ -82,7 +80,7 @@
             <!-- Date enregistrement -->
             <input type="date" name="date_enre" placeholder="Date Enregistrement" value="<%=gv != null ? gv.getDate_enre() : ""%>">
             <!-- bouton submit -->
-            <input type="submit">
+            <input type="submit" value="Modifier">
         </form>
     </body>
 </html>
