@@ -32,6 +32,7 @@ public class GestionVhServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
+        PrintWriter out = res.getWriter();
         try {
             String action = req.getParameter("action");
             String id = req.getParameter("id");
@@ -40,7 +41,7 @@ public class GestionVhServlet extends HttpServlet {
                 res.sendRedirect(ajouter);
             } else if (action.equals("modifier")) {
                 if (gv == null) {
-                    lister(req, res);
+//                    lister(req, res);
                 } else {
                     HttpSession session = req.getSession();
                     session.setAttribute("liste", gv);
@@ -48,9 +49,10 @@ public class GestionVhServlet extends HttpServlet {
                 }
 
             } else if (action.equals("supprimer")) {
-                    supprimer(req, res);
+                supprimer(req, res);
             } else if (action.equals("lister")) {
-                lister(req, res);
+//                lister(req, res);
+                out.println("mw nan servlet la e nan condition liste");
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,6 +60,7 @@ public class GestionVhServlet extends HttpServlet {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+   out.println("mw nan servlet la e nan condition liste");
     }
 
     @Override
