@@ -4,12 +4,21 @@
  */
 package model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 /**
  *
  * @author laine
  */
+@Entity
+@Table(name="renouvellement")
 public class Renou {
-
+@Id
+@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_renou;
     private int id_vehicule;
     private String no_transaction;

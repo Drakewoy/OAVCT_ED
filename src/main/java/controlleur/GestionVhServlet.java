@@ -41,7 +41,7 @@ public class GestionVhServlet extends HttpServlet {
                 res.sendRedirect(ajouter);
             } else if (action.equals("modifier")) {
                 if (gv == null) {
-//                    lister(req, res);
+                    lister(req, res);
                 } else {
                     HttpSession session = req.getSession();
                     session.setAttribute("liste", gv);
@@ -51,8 +51,8 @@ public class GestionVhServlet extends HttpServlet {
             } else if (action.equals("supprimer")) {
                 supprimer(req, res);
             } else if (action.equals("lister")) {
-//                lister(req, res);
-                out.println("mw nan servlet la e nan condition liste");
+                lister(req, res);
+         
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);

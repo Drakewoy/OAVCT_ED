@@ -52,18 +52,13 @@ public class GvDao implements Iservices<GestionVh> {
     @Override
     public GestionVh rechercher(String id) throws IOException, ClassNotFoundException, SQLException {
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-            // Create a query to select a GestionVh object by its ID
             Query query = session.createQuery("FROM GestionVh WHERE id_vehicule = :id");
             query.setParameter("id", id);
-
-            // Execute the query and get the result
             List<GestionVh> result = query.list();
-
-            // Check if a matching GestionVh object was found
             if (!result.isEmpty()) {
-                return result.get(0); // Assuming ID is unique, so returning the first match
+                return result.get(0); 
             } else {
-                return null; // No matching GestionVh found
+                return null; 
             }
         } catch (HibernateException ex) {
             ex.printStackTrace();
