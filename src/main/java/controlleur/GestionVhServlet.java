@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controlleur;
 
 import dao.GvDao;
@@ -52,7 +48,7 @@ public class GestionVhServlet extends HttpServlet {
                 supprimer(req, res);
             } else if (action.equals("lister")) {
                 lister(req, res);
-         
+
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,7 +56,7 @@ public class GestionVhServlet extends HttpServlet {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-   out.println("mw nan servlet la e nan condition liste");
+        out.println("mw nan servlet la e nan condition liste");
     }
 
     @Override
@@ -90,7 +86,6 @@ public class GestionVhServlet extends HttpServlet {
     // Enregistrer un vehicule
     protected void enregistrer(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException, ClassNotFoundException {
-
         GestionVh gv = new GestionVh();
         gv.setType_v(req.getParameter("type_v"));
         gv.setMarque(req.getParameter("marque"));
@@ -128,8 +123,8 @@ public class GestionVhServlet extends HttpServlet {
         }
 
     }
-    // Lister
 
+    // Lister
     protected void lister(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<GestionVh> afficher = null;
         try {

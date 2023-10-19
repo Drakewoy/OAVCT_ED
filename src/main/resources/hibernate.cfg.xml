@@ -14,5 +14,7 @@
         <property name="hbm2ddl.auto">update</property>
         <mapping class="model.GestionVh"/>
         <mapping class="model.TransfertModel"/>
+        <mapping class="model.Renou"/>
+        <mapping class="model.Alerte"/>
     </session-factory>
 </hibernate-configuration>

@@ -26,7 +26,7 @@
                     <h1>Transfert</h1>
                 </div>
             </a>
-            <a href="">
+            <a href="${pageContext.request.contextPath}/RenouServlet">
                 <div>
                     <img src="icon/rotate-right-solid.svg" alt="">
                     <h1>Renouvellement</h1>
