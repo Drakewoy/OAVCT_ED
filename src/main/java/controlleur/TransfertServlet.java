@@ -25,7 +25,8 @@ import model.TransfertModel;
  * @author laine
  */
 public class TransfertServlet extends HttpServlet {
-final String accueil = "GestionTransfert/accueilTrans.jsp";
+
+    final String accueil = "GestionTransfert/accueilTrans.jsp";
     final String enre_trans = "GestionTransfert/enre_transfert.jsp";
     final String modifier_t = "GestionTransfert/mod_transfert.jsp";
     TransfertDao tdao = new TransfertDao();
@@ -43,7 +44,7 @@ final String accueil = "GestionTransfert/accueilTrans.jsp";
                 lister(request, response);
             } else if (action.equals("enre_trans")) {
                 response.sendRedirect(enre_trans);
-            } else if (action.equals("modifier_t")) {
+            } else if (action.equals("modifier")) {
                 if (tmodel == null) {
                     lister(request, response);
                 } else {
@@ -65,25 +66,29 @@ final String accueil = "GestionTransfert/accueilTrans.jsp";
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            String id = request.getParameter("id");
-            String action = request.getParameter("action");
-            switch (action) {
-                case "enre_trans":
-                    save(request, response);
-                    break;
-                case "modifier_t":
-                    modifier(request, response);
-                    break;
-                default:
-                    lister(request, response);
-            }
+        PrintWriter out = response.getWriter();
 
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
+        String action = request.getParameter("action");
+        if (action.equals("enre_trans")) {
+            try {
+                save(request, response);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (action.equals("modifier")) {
+
+            try {
+//                out.println("mw riv ui");
+                modifier(request, response);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }
 
     @Override
@@ -121,7 +126,7 @@ final String accueil = "GestionTransfert/accueilTrans.jsp";
 
     }
 
-    private void lister(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+    protected void lister(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
         List<TransfertModel> afficher = null;
         try {
             afficher = tdao.lister();
@@ -137,7 +142,7 @@ final String accueil = "GestionTransfert/accueilTrans.jsp";
 
     }
 
-    private void supprimer(HttpServletRequest request, HttpServletResponse response)
+    protected void supprimer(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ClassNotFoundException, SQLException, ServletException {
         PrintWriter out = response.getWriter();
         String id = request.getParameter("id");
@@ -152,11 +157,11 @@ final String accueil = "GestionTransfert/accueilTrans.jsp";
         }
     }
 
-    private void modifier(HttpServletRequest request, HttpServletResponse response)
+    protected void modifier(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ClassNotFoundException, SQLException, ServletException {
         PrintWriter out = response.getWriter();
         TransfertModel model = new TransfertModel();
-        String id = request.getParameter("id_vehicule");
+        String id = request.getParameter("id_trans");
         model.setId_vehicule(Integer.parseInt(request.getParameter("id_vehicule")));
         model.setNouveau_prop(request.getParameter("nouveau_prop"));
         model.setSexe(request.getParameter("sexe"));
@@ -168,12 +173,13 @@ final String accueil = "GestionTransfert/accueilTrans.jsp";
         model.setDate_trans(request.getParameter("date_trans"));
         model.setEtat(request.getParameter("etat"));
         if (tdao.rechercher(id) != null) {
-            model.setId_vehicule(Integer.parseInt(id));
+            model.setId_trans(Integer.parseInt(id));
             if (tdao.modifier(model) > 0) {
                 lister(request, response);
-            } else {
-                out.print("Mise a jour echoue");
             }
+//else {
+//                out.print("Mise a jour echoue");
+//            }
         }
     }
 }

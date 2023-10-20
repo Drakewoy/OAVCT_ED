@@ -18,9 +18,10 @@
     
          <h1>Modifier un Transfert</h1>
         <hr>
-        <%TransfertModel tm = (TransfertModel) session.getAttribute("list");%>
+        <%TransfertModel tm = (TransfertModel) session.getAttribute("liste");%>
         <br>
-        <form  method="post" action="${pageContext.request.contextPath}/TransfertServlet?action=modifier_t">
+        <form  method="post" action="${pageContext.request.contextPath}/TransfertServlet?action=modifier">
+            <input type="hidden" name="id_trans" value="<%= tm != null ? tm.getId_trans() : 0 %>">
             <label for="id_vehicule" >id_vehicule</label>
             <input type="number" name="id_vehicule" id="id_vehicule" value="<%= tm != null ? tm.getId_vehicule() : 0 %>"><br><br>
             <label for="nouveau_prop">Nouveau proprietaire</label>
@@ -29,13 +30,13 @@
             <label for="sexe">Sexe</label>
             <select id="" name="sexe">
                 <% for (String sx :sexe ){%>
-                <option value="<%=sx%>" <%= tm != null && tm.getSexe().equalsIgnoreCase(sx)? "selected" : sx %>><%=sx%>></option>
+                <option value="<%=sx%>" <%= tm != null && tm.getSexe().equalsIgnoreCase(sx)? "selected" : sx %>><%=sx%></option>
                 <%}%>
             </select> <br><br>
-            <label for="telephone" >Telephone</labe>
+            <label for="telephone" >Telephone</label>
             <input type="text" name="telephone" id="telephone" value="<%= tm != null ? tm.getTelephone(): "" %>"><br><br>
-                <label for="adresse" >Adresse</labe>
-                    <input type="text" name="adresse" id="adresse" value="<%= tm != null ? tm.getAdresse(): "" %>><br><br>
+                <label for="adresse" >Adresse</label>
+                    <input type="text" name="adresse" id="adresse" value="<%= tm != null ? tm.getAdresse(): "" %>"><br><br>
 
                     <label for="type_piece">Type Pieces</label>  
                     <select id="type_piece" name="type_piece">
@@ -44,11 +45,11 @@
                         <%}%>
                     </select> <br><br>
                     <label for="no_piece" >No Piece</labe>
-                        <input type="text" name="no_piece" id="no_piece" value="<%= tm != null ? tm.getNo_piece(): "" %>> <br><br>
+                        <input type="text" name="no_piece" id="no_piece" value="<%= tm != null ? tm.getNo_piece(): "" %>"> <br><br>
                         <label for="motif_trans" >Motif Transfert</labe>
-                            <input type="text" name="motif_trans" id="motif_trans" value="<%= tm != null ? tm.getMotif_trans(): "" %>> <br><br>
+                            <input type="text" name="motif_trans" id="motif_trans" value="<%= tm != null ? tm.getMotif_trans(): "" %>"> <br><br>
                             <label for="date_trans" >Date transfert</labe>
-                                <input type="date" name="date_trans" id="date_trans" value="<%= tm != null ? tm.getDate_trans(): "" %>> <br><br>
+                                <input type="date" name="date_trans" id="date_trans" value="<%= tm != null ? tm.getDate_trans(): "" %>"> <br><br>
                                 <label for="etat" >Etat</labe>
                                 <select id="etat" name="etat">
                                     <%for(String et : etat){%>

@@ -43,8 +43,8 @@
         <td><c:out value="${tm.getMotif_trans()}"/></td>
         <td><c:out value="${tm.getDate_trans()}"/></td>
         <td><c:out value="${tm.getEtat()}"/></td>
-        
-        <td><a href="${pageContext.request.contextPath}/GestionTransfert/modifier_transfert.jsp">Modifier</a><td>
+
+        <td><a href="${pageContext.request.contextPath}/TransfertServlet?id=${tm.getId_trans()}&action=modifier">Modifier</a><td>
         <td><a href="${pageContext.request.contextPath}/GestionTransfert/supprimer_transfert.jsp">Supprimer</a><td>
     </tr>
             </c:forEach>

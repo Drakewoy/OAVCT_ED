@@ -95,7 +95,7 @@ public class TransfertDao implements Iservices<TransfertModel> {
             session = sessionFactory.openSession();
             // demarrer la transaction
             session.getTransaction().begin();
-            // persister l'objet Student s
+            // persister l'objet 
             session.merge(obj);
             // commit la transaction
             session.getTransaction().commit();
