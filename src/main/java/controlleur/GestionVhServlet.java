@@ -33,7 +33,9 @@ public class GestionVhServlet extends HttpServlet {
             String action = req.getParameter("action");
             String id = req.getParameter("id");
             GestionVh gv = gvDa.rechercher(id);
-            if (action.equals("ajouter")) {
+            if (action == null) {
+                lister(req, res);
+            } else if (action.equals("ajouter")) {
                 res.sendRedirect(ajouter);
             } else if (action.equals("modifier")) {
                 if (gv == null) {
@@ -46,17 +48,12 @@ public class GestionVhServlet extends HttpServlet {
 
             } else if (action.equals("supprimer")) {
                 supprimer(req, res);
-            } else if (action.equals("lister")) {
-                lister(req, res);
-
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        out.println("mw nan servlet la e nan condition liste");
     }
 
     @Override

@@ -4,12 +4,19 @@
  */
 package controlleur;
 
+import dao.AlerteDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Alerte;
 
 /**
  *
@@ -17,69 +24,113 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AlerteServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    final String alerte = "Alerte/alerte.jsp";
+    final String enre_alerte = "Alerte/enre_alerte.jsp";
+    final String modifier = "Alerte/mod_alerte.jsp";
+    AlerteDao aDao = new AlerteDao();
+    Alerte av = new Alerte();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AlerteServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AlerteServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String id = req.getParameter("id");
+        String action = req.getParameter("action");
+        try {
+            if (action == null) {
+                lister(req, res);
+            } else if (action.equals("modifier")) {
+                av = aDao.rechercher(id);
+                HttpSession session = req.getSession();
+                session.setAttribute("liste", av);
+                res.sendRedirect(modifier);
+            } else if (action.equals("enregistrer")) {
+                res.sendRedirect(enre_alerte);
+            }
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = res.getWriter();
+        String action = req.getParameter("action");
+        if (action == null) {
+            try {
+                lister(req, res);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (action.equals("modifier")) {
+            try {
+                modifier(req, res);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (action.equals("enregistrer")) {
+            try {
+                enregistrer(req, res);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(AlerteServlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+    protected void enregistrer(HttpServletRequest req, HttpServletResponse res)
+            throws ServletException, IOException, ClassNotFoundException, SQLException {
+        Alerte av = new Alerte();
+        av.setId_vehicule(Integer.parseInt(req.getParameter("id_vehicule")));
+        av.setType_alerte(req.getParameter("typeA"));
+        av.setLieu_incident(req.getParameter("lieu_inci"));
+        av.setHeure_incident(req.getParameter("heure_inci"));
+        av.setDeclarant(req.getParameter("declarant"));
+        av.setDescription(req.getParameter("description"));
+        aDao.save(av);
+        lister(req, res);
+
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void lister(HttpServletRequest req, HttpServletResponse res) throws IOException, ClassNotFoundException, SQLException {
+        List<Alerte> liste = aDao.lister();
+        HttpSession session = req.getSession();
+        session.setAttribute("liste", liste);
+        res.sendRedirect(alerte);
+    }
+
+    private void modifier(HttpServletRequest req, HttpServletResponse res) throws IOException, ClassNotFoundException, SQLException {
+        PrintWriter out = res.getWriter();
+        Alerte av = new Alerte();
+        String id = req.getParameter("id_alerte");
+        av.setId_vehicule(Integer.parseInt(req.getParameter("id_vehicule")));
+        av.setType_alerte(req.getParameter("typeA"));
+        av.setLieu_incident(req.getParameter("lieu_inci"));
+        av.setHeure_incident(req.getParameter("heure_inci"));
+        av.setDeclarant(req.getParameter("declarant"));
+        av.setDescription(req.getParameter("description"));
+        if (aDao.rechercher(id) != null) {
+            av.setId_alerte(Integer.parseInt(id));
+            if (aDao.modifier(av) > 0) {
+                lister(req, res);
+            } else {
+                out.print("Mise a jour echoue");
+            }
+        }
+    }
 
 }
