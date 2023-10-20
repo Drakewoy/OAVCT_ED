@@ -15,6 +15,7 @@
         <title>Renouvellement</title>
     </head>
     <body>
+        
         <a href="${pageContext.request.contextPath}/RenouServlet?action=renouvler">Renouvler Une Assurance</a>
         <table border="1">
             <tr>

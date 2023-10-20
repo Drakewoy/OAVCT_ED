@@ -31,7 +31,7 @@
     </tr
     <c:if test="${liste!=null}">
         <c:if test="${!liste.isEmpty()}">
-            <c:forEach var="tm" items="${lister}">
+            <c:forEach var="tm" items="${liste}">
     <tr>
         <td><c:out value="${tm.getId_vehicule()}"/></td>
         <td><c:out value="${tm.getNouveau_prop()}"/></td>
