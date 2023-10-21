@@ -9,13 +9,14 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="../css/style.css">
         <link rel="stylesheet" href="../css/bootstrap.min.css">
         <link rel="stylesheet" href="../css/bootstrap-icons/bootstrap-icons.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Renouvellement</title>
     </head>
     <body>
-        
+
         <a href="${pageContext.request.contextPath}/RenouServlet?action=renouvler">Renouvler Une Assurance</a>
         <table border="1">
             <tr>
