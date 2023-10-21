@@ -9,15 +9,18 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
+    <head
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-icons/bootstrap-icons.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
         <h1> List Vehicule</h1>
-        <a href="${pageContext.request.contextPath}/GestionVhServlet?action=ajouter">Ajouter un Vehicule</a>
+        <a href="${pageContext.request.contextPath}/GestionVhServlet?action=ajouter"><i class="bi bi-plus-square"></i></a>
 
-        <table class="table table-striped" border="1">
+        <table class="table table-striped" >
             <tr>
                 <th>Id-vehicule</th>
                 <th>Type-vehicule</th>
@@ -40,6 +43,7 @@
                 <th>Alerte</th>
                 <th>Date-alerte</th>
                 <th>Date-enregistrement</th>
+                <th>Action</th>
             </tr>
 
             <!--//                List<GestionVh> list = (List<GestionVh>) session.getAttribute("list");
@@ -48,7 +52,7 @@
             //   
             for (GestionVh gv : list) {-->
             <c:if test="${liste != null}">
-           <c:if test="${liste != ''}"> 
+                <c:if test="${liste != ''}"> 
                     <c:forEach var="gv" items="${liste}">
 
                         <tr>
@@ -74,8 +78,11 @@
                             <td><c:out value="${gv.getDate_alerte()}"/></td>
                             <td><c:out value="${gv.getDate_enre()}"/></td>
                             <%--<c:set>--%>
-                            <td><a  href="${pageContext.request.contextPath}/GestionVhServlet?id=${gv.getId_vehicule()}&action=modifier">Modifier</a></td>
-                            <td><a href="${pageContext.request.contextPath}/GestionVhServlet?id=${gv.getId_vehicule()}&action=supprimer">Supprimer</a></td>
+                            <td>
+                                <a  href="${pageContext.request.contextPath}/GestionVhServlet?id=${gv.getId_vehicule()}&action=modifier"><i class="bi bi-pencil-fill"></i></a>
+                                || <a href="${pageContext.request.contextPath}/GestionVhServlet?id=${gv.getId_vehicule()}&action=supprimer"><i class="bi bi-trash3"></i></a>
+                            </td>
+
                         </tr>
                     </c:forEach>
                 </c:if>

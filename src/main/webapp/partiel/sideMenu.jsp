@@ -8,33 +8,45 @@
 <!DOCTYPE html>
 <html>
     <head>
+       
+         <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-icons/bootstrap-icons.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+       
     </head>
     <body>
-         <div class="container2">
-            <a href="${pageContext.request.contextPath}/GestionVhServlet?action=lister">
+        <div class="container2">
+            <a href="${pageContext.request.contextPath}/index.jsp">
                 <div>
-                    <img src="icon/car-solid.svg" alt="car">
-                    <h1 style="font-size: 16px;">Gestion Vehicule
+                    <i class="bi bi-house"></i>
+                    <h1>Accueil
                     </h1>
                 </div>
             </a>
-            <a href="${pageContext.request.contextPath}/GestionTransfert/accueilTrans.jsp">
+            <a href="${pageContext.request.contextPath}/GestionVhServlet">
                 <div>
-                    <img src="icon/right-left-solid.svg" alt="">
+                    <i class="bi bi-car-front"></i>
+                    <h1>Gestion Vehicule
+                    </h1>
+                </div>
+            </a>
+            <a href="${pageContext.request.contextPath}/TransfertServlet">
+                <div>
+                    <i style="font-weight: bolder;" class="bi bi-arrow-left-right"></i>
                     <h1>Transfert</h1>
                 </div>
             </a>
             <a href="${pageContext.request.contextPath}/RenouServlet">
                 <div>
-                    <img src="icon/rotate-right-solid.svg" alt="">
-                    <h1>Renouvellement</h1>
+                    <i title="Renouvellement" class="bi bi-arrow-clockwise"></i>
+                    <h1 >Renouvellement</h1>
                 </div>
             </a>
-            <a href="">
+            <a href="${pageContext.request.contextPath}/AlerteServlet">
                 <div>
-                    <img src="icon/bell-regular.svg" alt="">
+                   <i class="bi bi-exclamation-octagon"></i>
                     <h1>Alerte</h1>
                 </div>
             </a>
