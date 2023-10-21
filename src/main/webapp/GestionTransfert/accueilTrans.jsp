@@ -13,7 +13,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp"><h2>Enregistrer un transfert</h2></a>
+        <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp?action=enre_trans"><h2>Enregistrer un transfert</h2></a>
         <table border="1">
     <tr>
         <th>id_vehicule </th>

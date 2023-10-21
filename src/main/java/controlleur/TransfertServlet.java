@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static jdk.nashorn.internal.runtime.Debug.id;
 import model.TransfertModel;
 
 /**
@@ -24,29 +25,35 @@ import model.TransfertModel;
  * @author laine
  */
 public class TransfertServlet extends HttpServlet {
-    final String transfert = "GestionTransfert/accueilTrans.jsp";
-    final String enre_trans = "GestionTransfert/mod_transfert.jsp";
-TransfertDao tdao = new TransfertDao();
+    final String enre_trans = "GestionTransfert/accueilTrans.jsp";
+    final String modifier_t = "GestionTransfert/mod_transfert.jsp";
+    TransfertDao tdao = new TransfertDao();
+    private String id_vehicule;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         PrintWriter out = response.getWriter();
         try {
+        String action = request.getParameter("action");
         String id = request.getParameter("id");
-        TransfertModel tv = tdao.rechercher(id);
-            PrintWriter out = response.getWriter();
-            String action = request.getParameter("action");
-            switch(action){
-                case "transfert":
-                    liste(request, response);
-                    break;
-                case "modifier" :
-                    if(tv !=null){
+        TransfertModel tmodel = tdao.rechercher(id);
+        if(action.equals("enre_trans")){
+           response.sendRedirect(enre_trans);
+        } else if (action.equals("modifier_t"))
+           if (tmodel == null){
+           //liste(request, response);
+           }else{
                     HttpSession session = request.getSession();
-                    session.setAttribute("liste", tv);
-                    response.sendRedirect(enre_trans);
+                    session.setAttribute("liste", tmodel);
+                    response.sendRedirect(modifier_t);
                     }
-            }} catch (ClassNotFoundException ex) {
+         else if (action.equals("supprimer")){
+         supprimer(request, response);
+         } else if (action.equals("lister")){
+             lister(request, response);
+         }    
+            } catch (ClassNotFoundException ex) {
             Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +65,16 @@ TransfertDao tdao = new TransfertDao();
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     try {
-        save(request, response);
+        String id = request.getParameter("id");
+        String action = request.getParameter("action");
+        switch(action){
+            case "enre_trans":  save(request, response);
+            break;
+            case "modifier_t": modifier(request, response);
+            break;
+            default: lister(request, response);
+        }
+       
     } catch (ClassNotFoundException ex) {
         Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
     } catch (SQLException ex) {
@@ -86,22 +102,62 @@ protected void save(HttpServletRequest request, HttpServletResponse response)
          model.setMotif_trans(request.getParameter("motif_trans"));
          model.setDate_trans(request.getParameter("date_trans"));
          model.setEtat(request.getParameter("etat"));
-         if(tdao.save(model) != 0){
-         liste(request, response);
-         }   
-}
+       try {
+            tdao.save(model);
+            HttpSession session = request.getSession();
+            session.setAttribute("model", model);
+            lister(request, response);
 
-    private void liste(HttpServletRequest request, HttpServletResponse response) 
-            throws IOException, ClassNotFoundException, SQLException, ServletException {
-         HttpSession session=request.getSession();
-        List<TransfertModel> listransfert = tdao.lister();
-        session.setAttribute("liste", listransfert);
-        request.getRequestDispatcher(transfert).forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionVhServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
+        } catch (UnsupportedOperationException ex) {
+            Logger.getLogger(GestionVhServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
+
     
 
-    private void modifier(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException, ServletException {
-    TransfertModel model = new TransfertModel();
+    private void lister(HttpServletRequest request, HttpServletResponse response) throws IOException, ClassNotFoundException, SQLException {
+        List<TransfertModel> afficher = null;
+        try {
+            afficher = tdao.lister();
+            HttpSession session = request.getSession();
+            session.setAttribute("liste", afficher);
+            response.sendRedirect("GestionTransfert/enre_transfert.jsp");
+
+        } catch (UnsupportedOperationException ex) {
+            Logger.getLogger(TransfertServlet.class
+                    .getName()).log(Level.SEVERE, null, ex);
+
+        }
+
+    }
+
+    
+      private void supprimer(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ClassNotFoundException, SQLException, ServletException {
+        PrintWriter out = response.getWriter();
+        String id = request.getParameter("id");
+        TransfertModel tm = new TransfertModel();
+        if (tdao.rechercher(id) != null) {
+            tm.setId_vehicule(Integer.parseInt((id)));
+            if (tdao.supprimer(tm) > 0) {
+                lister(request, response);
+            } else {
+                out.print("Suppression echoue");
+            }
+        }
+    }  
+     
+    private void modifier(HttpServletRequest request, HttpServletResponse response) 
+            throws IOException, ClassNotFoundException, SQLException, ServletException {
+        PrintWriter out = response.getWriter();
+        TransfertModel model = new TransfertModel();
+        String id = request.getParameter("id_vehicule");
         model.setId_vehicule(Integer.parseInt(request.getParameter("id_vehicule")));
         model.setNouveau_prop(request.getParameter("nouveau_prop"));
         model.setSexe(request.getParameter("sexe"));
@@ -112,10 +168,15 @@ protected void save(HttpServletRequest request, HttpServletResponse response)
          model.setMotif_trans(request.getParameter("motif_trans"));
          model.setDate_trans(request.getParameter("date_trans"));
          model.setEtat(request.getParameter("etat"));
-         if(tdao.save(model) != 0){
-         liste(request, response);
-         }else {
-                 out.print("erreur");
+         if (tdao.rechercher(id) != null) {
+            model.setId_vehicule(Integer.parseInt(id));
+            if (tdao.modifier(model) > 0) {
+                lister(request, response);
+            } else {
+                out.print("Mise a jour echoue");
+            }
     }
   }
 }
+
+   

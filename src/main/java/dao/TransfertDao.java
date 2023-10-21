@@ -4,6 +4,7 @@
  */
 package dao;
 
+import controlleur.TransfertServlet;
 import jakarta.persistence.Entity;
 import java.io.IOException;
 import java.sql.SQLException;
@@ -54,8 +55,17 @@ public class TransfertDao implements Iservices<TransfertModel> {
 
     @Override
     public int supprimer(TransfertModel obj) throws IOException, ClassNotFoundException, SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       int n =0;
+    try(Session session = HibernateUtils.getSessionFactory().openSession()){
+    transaction = session.getTransaction();
+    transaction.begin();
+    session.remove(obj);
+    transaction.commit();
+    n = 1;
     }
+    return n;
+    }
+    
 
     @Override
     public TransfertModel rechercher(String id) throws IOException, ClassNotFoundException, SQLException {
@@ -100,13 +110,17 @@ public class TransfertDao implements Iservices<TransfertModel> {
 
     @Override
     public List<TransfertModel> lister() throws IOException, ClassNotFoundException, SQLException {
+         List<TransfertModel> afficher = null;
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             transaction = session.getTransaction();
             transaction.begin();
-            List<TransfertModel> affich = session.createQuery("FROM TransfertModel", TransfertModel.class).list();
+            afficher = session.createQuery("FROM TransfertModel", TransfertModel.class).list();
             transaction.commit();
-            return affich;
         }
+            return afficher;
+        
     }
 
 }
+        
+   

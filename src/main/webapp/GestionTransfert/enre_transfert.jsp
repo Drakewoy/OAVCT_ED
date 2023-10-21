@@ -15,7 +15,7 @@
         <h1>Enregistrement un nouveau transfert</h1>
         <hr>
         <br>
-        <form  method="post" action="${pageContext.request.contextPath}/TransfertServlet">
+        <form  method="post" action="${pageContext.request.contextPath}/TransfertServlet?action=enre_trans">
             <label for="id_vehicule" >id_vehicule</label>
             <input type="number" name="id_vehicule" id="id_vehicule"><br><br>
             <label for="nouveau_prop">Nouveau proprietaire</label>
