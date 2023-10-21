@@ -1,7 +1,10 @@
+<<<<<<< HEAD
 /*/
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
+=======
+>>>>>>> a95d4c05ac9d0be1d561b2346195d2cf1fc4c2f5
 package controlleur;
 
 import dao.GvDao;
@@ -41,7 +44,11 @@ public class GestionVhServlet extends HttpServlet {
                 res.sendRedirect(ajouter);
             } else if (action.equals("modifier")) {
                 if (gv == null) {
+<<<<<<< HEAD
                  //lister(req, res);
+=======
+                    lister(req, res);
+>>>>>>> a95d4c05ac9d0be1d561b2346195d2cf1fc4c2f5
                 } else {
                     HttpSession session = req.getSession();
                     session.setAttribute("liste", gv);
@@ -52,6 +59,10 @@ public class GestionVhServlet extends HttpServlet {
                 supprimer(req, res);
             } else if (action.equals("lister")) {
                 lister(req, res);
+<<<<<<< HEAD
+=======
+
+>>>>>>> a95d4c05ac9d0be1d561b2346195d2cf1fc4c2f5
             }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
@@ -59,6 +70,10 @@ public class GestionVhServlet extends HttpServlet {
             Logger.getLogger(GestionVhServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+<<<<<<< HEAD
+=======
+        out.println("mw nan servlet la e nan condition liste");
+>>>>>>> a95d4c05ac9d0be1d561b2346195d2cf1fc4c2f5
     }
 
     @Override
@@ -88,7 +103,6 @@ public class GestionVhServlet extends HttpServlet {
     // Enregistrer un vehicule
     protected void enregistrer(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException, ClassNotFoundException {
-
         GestionVh gv = new GestionVh();
         gv.setType_v(req.getParameter("type_v"));
         gv.setMarque(req.getParameter("marque"));
@@ -126,8 +140,8 @@ public class GestionVhServlet extends HttpServlet {
         }
 
     }
-    // Lister
 
+    // Lister
     protected void lister(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         List<GestionVh> afficher = null;
         try {

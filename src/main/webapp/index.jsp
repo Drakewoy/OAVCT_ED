@@ -67,6 +67,7 @@
 
 <body>
     <div class="container">
+<<<<<<< HEAD
         <div class="container2">
             <a href="${pageContext.request.contextPath}/GestionVhServlet?action=lister">
                 <div>
@@ -94,6 +95,9 @@
                 </div>
             </a>
         </div>
+=======
+       <%@include file="partiel/sideMenu.jsp" %>
+>>>>>>> a95d4c05ac9d0be1d561b2346195d2cf1fc4c2f5
         <div class="container1"> Grand contenue</div>
     </div>
 </body>

@@ -4,12 +4,19 @@
  */
 package controlleur;
 
+import dao.RenouDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Renou;
 
 /**
  *
@@ -17,59 +24,40 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class RenouServlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    RenouDao rvDa = new RenouDao();
+    final String renou = "Renouvellement/renouvellement.jsp";
+    final String enregistrer = "Renouvellement/ajouRenou.jsp";
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet RenouServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet RenouServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String action = req.getParameter("action");
+        try {
+           if(action == null){
+            lister(req, res);
+           }else if(action.equals("renouvler")){
+                  res.sendRedirect(enregistrer);
+           }else{
+          lister(req,res);
+            }
+          
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RenouServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RenouServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            enregistrer(req, res);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RenouServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(RenouServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,4 +70,23 @@ public class RenouServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void lister(HttpServletRequest req, HttpServletResponse res) 
+            throws IOException, ClassNotFoundException, SQLException {
+       List<Renou> liste = rvDa.lister();
+       HttpSession session = req.getSession();
+       session.setAttribute("liste", liste);
+       res.sendRedirect(renou);
+    }
+
+    private void enregistrer(HttpServletRequest req, HttpServletResponse res) throws IOException, ClassNotFoundException, SQLException {
+        Renou rv = new Renou();
+        rv.setId_vehicule(Integer.parseInt(req.getParameter("id_vehicule")));
+        rv.setNo_transaction(req.getParameter("no_transaction"));
+        rv.setMontant_assu(Double.parseDouble(req.getParameter("montantA")));
+        rv.setDate_paie(req.getParameter("date_paie"));
+        rv.setDate_demission(req.getParameter("date_dem"));
+        if (rvDa.save(rv) > 0) {
+            lister(req, res);
+        }
+    }
 }

@@ -29,7 +29,7 @@
     </tr
     <c:if test="${liste!=null}">
         <c:if test="${!liste.isEmpty()}">
-            <c:forEach var="tm" items="${liste}">
+            <c:forEach var="tm" items="${lister}">
     <tr>
         <td><c:out value="${tm.getId_vehicule()}"/></td>
         <td><c:out value="${tm.getNouveau_prop()}"/></td>
