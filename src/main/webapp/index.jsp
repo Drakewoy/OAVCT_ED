@@ -17,7 +17,9 @@
 
 <body>
     <div class="container">
+
        <%@include file="partiel/sideMenu.jsp" %>
+
         <div class="container1"> Grand contenue</div>
     </div>
 </body>
