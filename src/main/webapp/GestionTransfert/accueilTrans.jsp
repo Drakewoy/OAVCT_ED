@@ -20,7 +20,7 @@
         <div class="containerO">
             <%@include file="../partiel/sideMenu.jsp" %>
             <div class="container1">
-                <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp?action=enre_trans"><h2>Enregistrer un transfert</h2></a>
+                <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp?action=enre_trans"><h2><i class="bi bi-plus-circle"></i></h2></a>
                 <table class="table table-striped" >
                     <tr>
                         <th>id_vehicule </th>
