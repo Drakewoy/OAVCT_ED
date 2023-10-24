@@ -15,8 +15,10 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp?action=enre_trans"><h2>Enregistrer un transfert</h2></a>
-        <table border="1">
+        <div class="mb-2"></div>
+        <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp?action=enre_trans"><button type="button" class="btn btn-light">Enregistrer un transfert</button></a>
+     <div class="mb-2"></div>
+       <table class="table table-striped table-hover">
     <tr>
         <th>id_vehicule </th>
         <th>Nouveau prop</th>
@@ -44,8 +46,8 @@
         <td><c:out value="${tm.getDate_trans()}"/></td>
         <td><c:out value="${tm.getEtat()}"/></td>
 
-        <td><a href="${pageContext.request.contextPath}/TransfertServlet?id=${tm.getId_trans()}&action=modifier">Modifier</a><td>
-        <td><a href="${pageContext.request.contextPath}/GestionTransfert/supprimer_transfert.jsp">Supprimer</a><td>
+        <td><a href="${pageContext.request.contextPath}/TransfertServlet?id=${tm.getId_trans()}&action=modifier"><i class="bi bi-pencil-fill"></i></a><td>
+        <td><a href="${pageContext.request.contextPath}/GestionTransfert/supprimer_transfert.jsp"><i class="bi bi-trash3"></i></a><td>
     </tr>
             </c:forEach>
         </c:if>

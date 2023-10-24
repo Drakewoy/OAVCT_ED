@@ -18,9 +18,9 @@
     </head>
     <body>
         <h1> List Vehicule</h1>
-        <a href="${pageContext.request.contextPath}/GestionVhServlet?action=ajouter"><i class="bi bi-plus-square"></i></a>
-
-        <table class="table table-striped" >
+        <a href="${pageContext.request.contextPath}/GestionVhServlet?action=ajouter"><button class="bi bi-plus-circle " type="button" class="btn btn-light">Ajouter un vehicule</button></a>
+<div class="mb-2"></div>
+        <table class="table table-striped table-hover" >
             <tr>
                 <th>Id-vehicule</th>
                 <th>Type-vehicule</th>
