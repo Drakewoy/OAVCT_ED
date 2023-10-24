@@ -28,6 +28,9 @@ i {
     margin-left: 45%;
     color: #6C5F5B;
 }
+td i{
+    font-size: 1em;
+}
 
 
 .container2 {

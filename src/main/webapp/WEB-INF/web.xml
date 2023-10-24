@@ -16,6 +16,14 @@
         <servlet-name>GestionVhServlet</servlet-name>
         <servlet-class>controlleur.GestionVhServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImpRecu</servlet-name>
+        <servlet-class>controlleur.ImpRecu</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DownloadRecu</servlet-name>
+        <servlet-class>controlleur.DownloadRecu</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TransfertServlet</servlet-name>
         <url-pattern>/TransfertServlet</url-pattern>
@@ -32,10 +40,17 @@
         <servlet-name>GestionVhServlet</servlet-name>
         <url-pattern>/GestionVhServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImpRecu</servlet-name>
+        <url-pattern>/ImpRecu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DownloadRecu</servlet-name>
+        <url-pattern>/DownloadRecu</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
-       
     </session-config>
 </web-app>
