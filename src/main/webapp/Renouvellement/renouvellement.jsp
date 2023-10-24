@@ -16,16 +16,11 @@
         <title>Renouvellement</title>
     </head>
     <body>
-<<<<<<< HEAD
+
          <div class="mb-2"></div>
         <a href="${pageContext.request.contextPath}/RenouServlet?action=renouvler"><button type="button" class="btn btn-light">Renouvler Une Assurance</button></a>     
         <table  class="table table-striped table-hover">
         <div class="mb-2"></div>   
-=======
-
-        <a href="${pageContext.request.contextPath}/RenouServlet?action=renouvler">Renouvler Une Assurance</a>
-        <table border="1">
->>>>>>> 966ccb37874021765463bbc2643b80f4be99c90a
             <tr>
                 <th>Id_renouv</th>
                 <th>Id_vehicule</th>
