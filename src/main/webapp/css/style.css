@@ -6,6 +6,7 @@
     /*background-color: red;*/
     border: 10px solid #F5F7F8;
     border-radius: 15px;
+    overflow-x: auto;
 }
 
 img {
