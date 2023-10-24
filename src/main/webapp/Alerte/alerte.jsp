@@ -16,7 +16,7 @@
         <title>Les Alertes</title>
     </head>
     <body>
-        <div class="container">
+        <div class="containerO">
             <%@include file="../partiel/sideMenu.jsp" %>
             <div class="container1">
                 <a href="${pageContext.request.contextPath}/AlerteServlet?action=enregistrer"><button style="border-radius:10px; margin:5px 0 5px 5px; background-color: red; color:#fff; border:none;">Alerter</button></a>

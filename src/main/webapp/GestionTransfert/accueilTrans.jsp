@@ -17,7 +17,7 @@
     </head>
     <body>
 
-        <div class="container">
+        <div class="containerO">
             <%@include file="../partiel/sideMenu.jsp" %>
             <div class="container1">
                 <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp?action=enre_trans"><h2>Enregistrer un transfert</h2></a>
