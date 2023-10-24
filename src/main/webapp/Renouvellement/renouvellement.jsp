@@ -26,6 +26,7 @@
                 <th>Montant Assurance</th>
                 <th>Date Paiement</th>
                 <th>Date fin assurance</th>
+                <th>Action</th>
             </tr>
             <c:if test="${liste != null }">
                 <c:forEach var="rv" items="${liste}">
@@ -36,6 +37,7 @@
                         <td><c:out value="${rv.getMontant_assu()}"/></td>
                         <td><c:out value="${rv.getDate_paie()}"/></td>
                         <td><c:out value="${rv.getDate_demission()}"/></td>
+                        <td><a href="${pageContext.request.contextPath}/ImpRecu?id=${rv.getId_renou()}">Imprimer</a></td>
                     </tr>
                 </c:forEach>
             </c:if>
