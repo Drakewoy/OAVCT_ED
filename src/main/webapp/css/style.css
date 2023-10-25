@@ -1,11 +1,12 @@
 
 .containerO {
-    margin-top: 30px;       
+    margin-top: 30px;
     display: flex;
     padding:10px 0px 2px 5px;
     border: 10px solid #F5F7F8;
     border-radius: 15px;
     overflow-x: hidden;
+    background-color: #FFD89C;
 }
 
 img {
@@ -74,4 +75,23 @@ td i{
     overflow-x: auto;
 }
 
+/*design pou pati input yo*/
+/*input{
+    display: block;
+}*/
+
+.containerF{
+    display: block;
+    margin:30px auto;
+    width: 70vw;
+}
+.containerF input, select{
+    margin-bottom: 10px;
+}
+.containerIn{
+    width: 60vw;
+    box-shadow: 0px 0px 18px 2px aqua;
+    padding: 10px;
+    margin:auto;
+}
 

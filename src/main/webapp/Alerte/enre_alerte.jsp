@@ -8,24 +8,33 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" href="../css/style.css">
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/bootstrap-icons/bootstrap-icons.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="${pageContext.request.contextPath}/AlerteServlet?action=enregistrer" method="post">
-            <input type="text" name="id_vehicule" placeholder="ID véhicule">
-            <select name="typeA" id="">
-                       <option selected>Type D'accident</option>
-                <option value="Vol">Vol</option>
-                <option value="Perte">Perte</option>
-                <option value="Trafics Illicites">Trafics Illicites</option>
-                <option value="Activités Illégale">Activités Illégale</option>
-            </select>
-            <input type="text" name="lieu_inci" placeholder="Lieu d’incident">
-            <input type="time" name="heure_inci" placeholder="Heure d’incident (HH :MM)">
-            <input type="text" name="declarant" placeholder="Déclarant">
-            <input type="text" name="description" placeholder="Description">
-            <input type="submit" value="Alerter">
-        </form>
+        <div class="containerF">
+            <div class="containerIn">
+                <a href="${pageContext.request.contextPath}/AlerteServlet"><i class="bi bi-arrow-left-square"></i></a>
+                <form action="${pageContext.request.contextPath}/AlerteServlet?action=enregistrer" method="post">
+                    <input type="text" class="form-control" name="id_vehicule" placeholder="ID véhicule">
+                    <select name="typeA" id="">
+                        <option selected>Type D'accident</option>
+                        <option value="Vol">Vol</option>
+                        <option value="Perte">Perte</option>
+                        <option value="Trafics Illicites">Trafics Illicites</option>
+                        <option value="Activités Illégale">Activités Illégale</option>
+                    </select>
+                    <input type="text" class="form-control" name="lieu_inci" placeholder="Lieu d’incident">
+                    <label for="heure_inci" class="form-label">Heure D'incident</label>
+                    <input type="time" class="form-control" name="heure_inci" placeholder="Heure d’incident (HH :MM)">
+                    <input type="text" class="form-control" name="declarant" placeholder="Déclarant">
+                    <input type="text" class="form-control" name="description" placeholder="Description">
+                    <input type="submit" class="form-control" value="Alerter">
+                </form>
+            </div>
+        </div>
     </body>
 </html>

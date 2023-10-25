@@ -19,7 +19,7 @@
         <div class="containerO">
             <%@include file="../partiel/sideMenu.jsp" %>
             <div class="container1">
-                <a href="${pageContext.request.contextPath}/AlerteServlet?action=enregistrer"><button style="border-radius:10px; margin:5px 0 5px 5px; background-color: red; color:#fff; border:none;">Alerter</button></a>
+                <a href="${pageContext.request.contextPath}/AlerteServlet?action=enregistrer"><button style="border-radius:10px; margin:5px 0 5px 5px; background-color: red; color:#fff; border:3px solid pink;">Alerter</button></a>
                 <table class="table table-striped table-hover">
                     <tr>
                         <th>Id Alerte</th>
