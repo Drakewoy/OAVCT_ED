@@ -18,6 +18,9 @@
     </head>
     <body>
         <div class="containerF">
+             <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
+               href="${pageContext.request.contextPath}/LoginServlet" >
+                <button style="border-radius:15px;" > Log out</button></a>
             <div class="containerIn">
                 <%Alerte al = (Alerte) session.getAttribute("liste");%>
                 <a href="${pageContext.request.contextPath}/AlerteServlet"><i class="bi bi-arrow-left-square"></i></a>

@@ -18,6 +18,9 @@
     <body>
 
         <div class="containerO">
+             <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
+               href="${pageContext.request.contextPath}/LoginServlet" >
+                <button style="border-radius:15px;" > Log out</button></a>
             <%@include file="../partiel/sideMenu.jsp" %>
             <div class="container1">
                 <a href="${pageContext.request.contextPath}/GestionTransfert/enre_transfert.jsp?action=enre_trans"><h2><i class="bi bi-plus-circle"></i></h2></a>

@@ -24,6 +24,10 @@
         <servlet-name>DownloadRecu</servlet-name>
         <servlet-class>controlleur.DownloadRecu</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>controlleur.LoginServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TransfertServlet</servlet-name>
         <url-pattern>/TransfertServlet</url-pattern>
@@ -48,9 +52,18 @@
         <servlet-name>DownloadRecu</servlet-name>
         <url-pattern>/DownloadRecu</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <welcome-file-list>
+        <welcome-file>
+            login.jsp
+        </welcome-file>
+    </welcome-file-list>
 </web-app>

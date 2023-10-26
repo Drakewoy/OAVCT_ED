@@ -20,6 +20,9 @@
     </head>
     <body>
         <div class="containerF">
+             <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
+               href="${pageContext.request.contextPath}/LoginServlet" >
+                <button style="border-radius:15px;" > Log out</button></a>
             <div class="containerIn">
                 <h1>Modifier un Transfert</h1>
 
@@ -27,7 +30,9 @@
 
                 <a href="${pageContext.request.contextPath}/TransfertServlet"><i class="bi bi-arrow-left-square"></i></a>
                 <form  method="post" action="${pageContext.request.contextPath}/TransfertServlet?action=modifier">
-                    <input type="text" disabled class="form-control" name="id_trans" value="<%= tm != null ? tm.getId_trans() : 0%>">
+                       <label for="id_trans" class="form-label">id_transfert</label>
+                         <input type="hidden"  class="form-control" name="id_trans" value="<%= tm != null ? tm.getId_trans() : 0%>">
+                       <input type="text" disabled class="form-control"  value="<%= tm != null ? tm.getId_trans() : 0%>">
                     <label for="id_vehicule" class="form-label">id_vehicule</label>
                     <input type="number" class="form-control" name="id_vehicule" id="id_vehicule" value="<%= tm != null ? tm.getId_vehicule() : 0%>"><br><br>
                     <label for="nouveau_prop" class="form-label">Nouveau proprietaire</label>

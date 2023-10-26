@@ -6,11 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
-    String error1;
-    if (session.getAttribute("error1") != null) {
-        error1 = session.getAttribute("error1").toString();
+    String error;
+    if (session.getAttribute("error") != null) {
+        error = session.getAttribute("error").toString();
     } else {
-        error1 = "";
+        error = "";
     }%>
 <!DOCTYPE html>
 <html>
@@ -24,20 +24,19 @@
     <body style="background-color: unset;">
 
         <div class="loginBox">
-            <h1>Connectez-Vous!!!!</h1>
+            <h1>Ceer Un Compte</h1>
 
             <!--                partie Utilisateur-->
             <div class="formLog">
-                <form action="${pageContext.request.contextPath}/LoginServlet?action=login" method="post">
-                    <p style="color:red; background-color:#fff; text-align: center; border-radius: 15px; font-size: 18px;"><%=error1%></p>
+                <form action="${pageContext.request.contextPath}/LoginServlet?action=register" method="post">
+                    <p style="color:red; background-color:#fff; text-align: center; border-radius: 15px; font-size: 18px;"><%=error%></p>
                     <input type="text" class="form-control" name="user" placeholder="Nom d'utilisateur" required>
                     <input type="password" class="form-control" name="pass"  placeholder="password" required>
                     <label for="user" >Utilisateur</label>
-                    <input type="radio" name="compte" required>
+                    <input type="radio" name="compte" value="user" required>
                     <label for="user" >Administrateur</label>
-                    <input type="radio" name="compte" required>
-                    <input type="submit" class="form-control"  value="Connecter">
-                    <p><a href="${pageContext.request.contextPath}/register.jsp">cliquez ici</a> pour inscrire si vous etes nouveau</p>
+                    <input type="radio" name="compte" value="admin" required>
+                    <input type="submit" class="form-control"  value="Creer Compte">
                 </form>
             </div>
         </div>

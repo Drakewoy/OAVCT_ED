@@ -17,6 +17,9 @@
     </head>
     <body>
         <div class="containerO">
+             <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
+               href="${pageContext.request.contextPath}/LoginServlet" >
+                <button style="border-radius:15px;" > Log out</button></a>
             <%@include file="../partiel/sideMenu.jsp" %>
             <div class="container1">
                 <a href="${pageContext.request.contextPath}/AlerteServlet?action=enregistrer"><button style="border-radius:10px; margin:5px 0 5px 5px; background-color: red; color:#fff; border:3px solid pink;">Alerter</button></a>

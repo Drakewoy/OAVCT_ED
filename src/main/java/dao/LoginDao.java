@@ -4,38 +4,31 @@
  */
 package dao;
 
-import controlleur.TransfertServlet;
-import jakarta.persistence.Entity;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-import model.TransfertModel;
+import model.Compte;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import static sun.jvm.hotspot.HelloWorld.e;
 import utils.HibernateUtils;
 
 /**
  *
- * @author Eddy
+ * @author laine
  */
-public class TransfertDao implements Iservices<TransfertModel> {
+public class LoginDao implements Iservices<Compte> {
 
     Transaction transaction = null;
-    private SessionFactory sessionFactory = null;
-    private Session session = null;
 
     @Override
-    public int save(TransfertModel e) throws IOException, ClassNotFoundException, SQLException {
+    public int save(Compte obj) throws IOException, ClassNotFoundException, SQLException {
         int n = 0;
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             transaction = session.getTransaction();
             transaction.begin();
-            session.persist(e);
+            session.persist(obj);
             transaction.commit();
             n = 1;
         }
@@ -43,8 +36,8 @@ public class TransfertDao implements Iservices<TransfertModel> {
     }
 
     @Override
-    public int supprimer(TransfertModel obj) throws IOException, ClassNotFoundException, SQLException {
-        int n = 0;
+    public int supprimer(Compte obj) throws IOException, ClassNotFoundException, SQLException {
+    int n = 0;
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             transaction = session.getTransaction();
             transaction.begin();
@@ -56,48 +49,46 @@ public class TransfertDao implements Iservices<TransfertModel> {
     }
 
     @Override
-    public TransfertModel rechercher(String id) throws IOException, ClassNotFoundException, SQLException {
-        try (Session session = HibernateUtils.getSessionFactory().openSession()) {
-            Query query = session.createQuery("FROM TransfertModel Where id_trans = :id");
+    public Compte rechercher(String id) throws IOException, ClassNotFoundException, SQLException {
+     try (Session session = HibernateUtils.getSessionFactory().openSession()) {
+            Query query = session.createQuery("FROM Compte WHERE id = :id");
             query.setParameter("id", id);
-            List<TransfertModel> result = query.list();
-
+            List<Compte> result = query.list();
             if (!result.isEmpty()) {
-                return result.get(0);
+                return result.get(0); 
             } else {
-
-                return null;
+                return null; 
             }
-
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+            throw new SQLException("Error searching for Compte: " + ex.getMessage());
         }
     }
 
     @Override
-    public int modifier(TransfertModel obj) throws IOException, ClassNotFoundException, SQLException {
-
-        int n = 0;
+    public int modifier(Compte obj) throws IOException, ClassNotFoundException, SQLException {
+         int n = 0;
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             transaction = session.getTransaction();
             transaction.begin();
             session.merge(obj);
             transaction.commit();
             n = 1;
-            session.close();
         }
-        return n;
+        return n; 
     }
 
     @Override
-    public List<TransfertModel> lister() throws IOException, ClassNotFoundException, SQLException {
-        List<TransfertModel> afficher = null;
+    public List<Compte> lister() throws IOException, ClassNotFoundException, SQLException {
+        List<Compte> affich = null;
         try (Session session = HibernateUtils.getSessionFactory().openSession()) {
             transaction = session.getTransaction();
             transaction.begin();
-            afficher = session.createQuery("FROM TransfertModel", TransfertModel.class).list();
+            affich = session.createQuery("FROM Compte", Compte.class).list();
             transaction.commit();
         }
-        return afficher;
-
+        
+        return affich;
     }
 
 }

@@ -16,5 +16,6 @@
         <mapping class="model.TransfertModel"/>
         <mapping class="model.Renou"/>
         <mapping class="model.Alerte"/>
+        <mapping class="model.Compte"/>
     </session-factory>
 </hibernate-configuration>

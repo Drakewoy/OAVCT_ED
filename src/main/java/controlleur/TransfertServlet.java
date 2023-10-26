@@ -78,7 +78,6 @@ public class TransfertServlet extends HttpServlet {
                 Logger.getLogger(TransfertServlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (action.equals("modifier")) {
-
             try {
 //                out.println("mw riv ui");
                 modifier(request, response);
@@ -123,7 +122,6 @@ public class TransfertServlet extends HttpServlet {
             Logger.getLogger(GestionVhServlet.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
-
 
     }
 
@@ -178,10 +176,11 @@ public class TransfertServlet extends HttpServlet {
             model.setId_trans(Integer.parseInt(id));
             if (tdao.modifier(model) > 0) {
                 lister(request, response);
+            } else {
+                out.print("Mise a jour echoue");
             }
-//else {
-//                out.print("Mise a jour echoue");
-//            }
+        } else {
+            out.print("mw pa jwenn id a" + id);
         }
     }
 }
