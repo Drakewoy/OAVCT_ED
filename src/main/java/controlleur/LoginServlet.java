@@ -47,68 +47,61 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res)
-            throws ServletException, IOException {
-        String action = req.getParameter("action");
-        String nom = req.getParameter("user");
-        String pass = req.getParameter("pass");
-        String typeC = req.getParameter("compte");
-        if (action.equals("register")) {
-            try {
-                enregistrer(req, res);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (action.equals("login")) {
-            try {
-                PrintWriter out = res.getWriter();
-                //            String id = ldao.rechercher(id);
-
-                List<Compte> liste = ldao.lister();
-                if (liste != null && !liste.isEmpty()) {
-                    for (Compte ls : liste) {
-                        idU = "" + ls.getId();
-                        userN = ls.getUser();
-                        passU = ls.getPass();
-                        typeCU = ls.getTypeCompte();
-
-                        if (nom.equals(userN) && pass.equals(passU)) {
-                            HttpSession session = req.getSession();
-                            session.setAttribute("login", userN + "_" + idU);
-                            res.sendRedirect(accueil);
-
-                        } else {
-                            error1 = "Nom d'utilisateur ou Mot de pass est Incorrect";
-                            HttpSession session = req.getSession();
-                            session.setAttribute("error1", error1);
-                            res.sendRedirect(login);
-                        }
-
-                    }
-
-                } else {
-                    error = "Aucun compte correspond a cet utilisateur";
-                    HttpSession session = req.getSession();
-                    session.setAttribute("error", error);
-                    res.sendRedirect(register);
-                }
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            res.sendRedirect(login);
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    String action = req.getParameter("action");
+    
+    if (action.equals("register")) {
+        try {
+            enregistrer(req, res);
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+          
         }
-//        
+    } else if (action.equals("login")) {
+        try {
+            String nom = req.getParameter("user");
+            String pass = req.getParameter("pass");
+
+            List<Compte> liste = ldao.lister();
+
+            boolean found = false; 
+
+            if (liste != null && !liste.isEmpty()) {
+                for (Compte ls : liste) {
+                    idU = String.valueOf(ls.getId());
+                    userN = ls.getUser();
+                    passU = ls.getPass();
+                    typeCU = ls.getTypeCompte();
+
+                    if (nom.equals(userN) && pass.equals(passU)) {
+                        found = true;
+                        HttpSession session = req.getSession();
+                        session.setAttribute("login", userN + "_" + idU);
+                        req.getRequestDispatcher(accueil).forward(req, res);
+                        break;
+                    }
+                }
+            }
+
+            if (!found) {
+                error1 = "Nom d'utilisateur ou Mot de passe est incorrect";
+                HttpSession session = req.getSession();
+                session.setAttribute("error1", error1);
+                req.getRequestDispatcher(login).forward(req, res);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(LoginServlet.class.getName()).log(Level.SEVERE, null, ex);
+          
+        }
+    } else {
+        res.sendRedirect(login);
     }
+}
 
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
+    }
 
     protected void enregistrer(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException, ClassNotFoundException, SQLException {

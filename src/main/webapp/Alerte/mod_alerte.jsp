@@ -18,7 +18,7 @@
     </head>
     <body>
         <div class="containerF">
-             <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
+            <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
                href="${pageContext.request.contextPath}/LoginServlet" >
                 <button style="border-radius:15px;" > Log out</button></a>
             <div class="containerIn">
@@ -27,6 +27,8 @@
                 <form action="${pageContext.request.contextPath}/AlerteServlet?action=modifier" method="post">
                     <label for="id_alerte" class="form-label">Id Alerte</label>
                     <input type="text" class="form-control" disabled name="id_alerte" value="<%=al.getId_alerte()%>">
+                    <input type="hidden" class="form-control"  name="id_alerte" value="<%=al.getId_alerte()%>">
+
                     <label for="id_vehicule" class="form-label">Id Vehicule</label>
                     <input type="text" class="form-control" name="id_vehicule" value="<%=al.getId_vehicule()%>">
                     <select name="typeA" id="">

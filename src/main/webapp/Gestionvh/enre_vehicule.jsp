@@ -30,7 +30,7 @@
                         <option value="poidsLourds">Poids lourds</option>
                     </select>
                     <!-- ID vehicule-->
-                    <input type="text" name="id_v" placeholder="Id vehicule" class="form-control">
+                    <!--<input type="text" name="id_v" placeholder="Id vehicule" class="form-control">-->
                     <!-- Marque -->
                     <input type="text" name="marque" placeholder="Marque" class="form-control">
                     <!-- Modele -->

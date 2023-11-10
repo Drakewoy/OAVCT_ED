@@ -37,7 +37,7 @@
                     </select>
                     <!-- ID vehicule-->
                     <label for="id_v" class="form-label">Id Vehicule</label>
-                    <input type="text" name="id_v" class="form-control" disabled placeholder="Id vehicule" value="<%= gv != null ? gv.getId_vehicule() : 0%>">
+                    <input type="text" name="id_v" class="form-control"  placeholder="Id vehicule" value="<%= gv != null ? gv.getId_vehicule() : 0%>">
                     <!-- Marque -->
                     <label for="marque" class="form-label">Marque</label>
                     <input type="text" name="marque" class="form-control" placeholder="Marque" value="<%=gv != null ? gv.getMarque() : ""%>">

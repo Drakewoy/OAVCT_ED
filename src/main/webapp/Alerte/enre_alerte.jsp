@@ -16,12 +16,13 @@
     </head>
     <body>
         <div class="containerF">
-             <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
+            <a style="float:right; border-radius:15px; font-size:14px; display: block; position: absolute; top:2px; right:1px;" 
                href="${pageContext.request.contextPath}/LoginServlet" >
                 <button style="border-radius:15px;" > Log out</button></a>
             <div class="containerIn">
                 <a href="${pageContext.request.contextPath}/AlerteServlet"><i class="bi bi-arrow-left-square"></i></a>
                 <form action="${pageContext.request.contextPath}/AlerteServlet?action=enregistrer" method="post">
+                  
                     <input type="text" class="form-control" name="id_vehicule" placeholder="ID véhicule">
                     <select name="typeA" id="">
                         <option selected>Type D'accident</option>
